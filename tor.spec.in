@@ -106,7 +106,7 @@ Group: System Environment/Daemons
 
 License: 3-clause BSD
 Vendor: The Tor Project (https://torproject.org)
-Packager: Erinn Clark <erinn@torproject.org>
+Packager: Ondrej Mikle <hiviah@torproject.org>
 
 Requires: openssl >= 0.9.7, libevent >= 1.4.13
 BuildRequires: openssl-devel >= 0.9.7, libevent-devel >= 1.4.13, asciidoc
@@ -284,6 +284,27 @@ exit 0
 %attr(0750,%{toruser},%{torgroup}) %dir %{_localstatedir}/log/%{name}
 
 %changelog
+* Thu Sep  6 2012 Ondrej Mikle <ondrej.mikle@gmail.com>
+- bump to version 0.2.3.21-rc
+- security bugfixes:
+  - Tear down the circuit if we get an unexpected SENDME cell. Clients
+    could use this trick to make their circuits receive cells faster
+    than our flow control would have allowed, or to gum up the network,
+    or possibly to do targeted memory denial-of-service attacks on
+    entry nodes. Fixes bug 6252. Bugfix on the 54th commit on Tor --
+    from July 2002, before the release of Tor 0.0.0. We had committed
+    this patch previously, but we had to revert it because of bug 6271.
+    Now that 6271 is fixed, this patch appears to work.
+  - Reject any attempt to extend to an internal address. Without
+    this fix, a router could be used to probe addresses on an internal
+    network to see whether they were accepting connections. Fixes bug
+    6710; bugfix on 0.0.8pre1.
+  - Do not crash when comparing an address with port value 0 to an
+    address policy. This bug could have been used to cause a remote
+    assertion failure by or against directory authorities, or to
+    allow some applications to crash clients. Fixes bug 6690; bugfix
+    on 0.2.1.10-alpha.
+
 * Thu Jun 21 2012 Ondrej Mikle <ondrej.mikle@gmail.com>
 - fixed to work with both rpmbuild and mock on RHEL/Fedora
 - removed unnecessary files from rpm such as .git repo
