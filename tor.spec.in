@@ -261,9 +261,9 @@ exit 0
 %files
 %defattr(-,root,root)
 %if %{is_suse}
-%doc INSTALL LICENSE README ChangeLog doc/HACKING doc/TODO doc/*html
+%doc INSTALL LICENSE README ChangeLog doc/HACKING doc/*html
 %endif
-%doc INSTALL LICENSE README ChangeLog doc/HACKING doc/TODO
+%doc INSTALL LICENSE README ChangeLog doc/HACKING
 %{_mandir}/man*/*
 %{_bindir}/tor
 %{_bindir}/torctl
