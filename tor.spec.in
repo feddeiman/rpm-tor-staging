@@ -284,6 +284,17 @@ exit 0
 %attr(0750,%{toruser},%{torgroup}) %dir %{_localstatedir}/log/%{name}
 
 %changelog
+* Wed Sep 12 2012 Ondrej Mikle <hiviah@torproject.org>
+- bump to version 0.2.3.22-rc
+- security fixes:
+  - Fix an assertion failure in tor_timegm() that could be triggered
+    by a badly formatted directory object. Bug found by fuzzing with
+    Radamsa. Fixes bug 6811; bugfix on 0.2.0.20-rc.
+- minor bugfixes:
+  - Avoid segfault when starting up having run with an extremely old
+    version of Tor and parsing its state file. Fixes bug 6801; bugfix
+    on 0.2.2.23-alpha.
+
 * Thu Sep  6 2012 Ondrej Mikle <ondrej.mikle@gmail.com>
 - bump to version 0.2.3.21-rc
 - security bugfixes:
