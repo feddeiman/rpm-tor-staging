@@ -1316,6 +1316,7 @@ AC_CONFIG_FILES([
         contrib/torctl
         contrib/torify
         src/config/torrc.sample
+        tor.spec
 ])
 
 AC_OUTPUT
